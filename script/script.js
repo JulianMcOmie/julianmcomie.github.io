@@ -11,24 +11,13 @@ window.onscroll = function() {
     }
 }
 
-$(window).scroll(function() {
-  if ($(window).scrollTop() > 75) {
-      $('#navBar').css("opacity", 0.3);
-  }
-  else {
-      $('#navBar').css("opacity", 1);
-  }
+document.addEventListener('click', function(event) {
+    var isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+    var isNavbarToggler = event.target.classList.contains('navbar-toggler');
+    var isNavbarOpen = document.querySelector('.navbar-collapse').classList.contains('show'); // Change 'show' to 'showing' if 'show' doesn't work
+
+    if (!isClickInsideNavbar && isNavbarOpen && !isNavbarToggler) {
+        document.querySelector('.navbar-toggler').click();
+    }
 });
 
-$(document).ready(function(){
-  $('#navBar').live("mouseover", function () {
-          $(this).css("opacity", 1);
-          });
-
-  $('#navBar').live("mouseleave", function () {
-      if($(window).scrollTop() > 75) { // this here
-          $(this).css("opacity", 0.3);
-      }
-  });
-
-})
